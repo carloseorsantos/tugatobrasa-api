@@ -1,0 +1,3 @@
+# Exceção à regra "term_pt/term_br em minúsculas e NFC" (docs/glossario-spec.md, regra 4).
+# Um termo por linha, exatamente como aparece no CSV (sensível a maiúsculas).
+# Mudar este arquivo é uma decisão de mantenedor — revise no mesmo PR que adiciona o termo.
