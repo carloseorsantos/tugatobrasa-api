@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: tugatobrasa
+      POSTGRES_USER: tugatobrasa
+      POSTGRES_PASSWORD: tugatobrasa
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tugatobrasa"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tugatobrasa
+      SPRING_DATASOURCE_USERNAME: tugatobrasa
+      SPRING_DATASOURCE_PASSWORD: tugatobrasa
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
