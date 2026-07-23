@@ -13,9 +13,11 @@ public class TranslationPipelineService {
     private static final double FUZZY_CONFIDENCE = 0.7;
 
     private final GlossaryResolver glossaryResolver;
+    private final NotFoundHandler notFoundHandler;
 
-    public TranslationPipelineService(GlossaryResolver glossaryResolver) {
+    public TranslationPipelineService(GlossaryResolver glossaryResolver, NotFoundHandler notFoundHandler) {
         this.glossaryResolver = glossaryResolver;
+        this.notFoundHandler = notFoundHandler;
     }
 
     public ResolutionResult resolve(String rawText, Direction direction) {
@@ -27,6 +29,6 @@ public class TranslationPipelineService {
         List<GlossaryEntry> fuzzy = glossaryResolver.resolveFuzzy(term, direction);
         if (!fuzzy.isEmpty()) return new Resolved(fuzzy, FUZZY_CONFIDENCE);
 
-        return new NotResolved();
+        return notFoundHandler.handle(rawText, term, direction);
     }
 }

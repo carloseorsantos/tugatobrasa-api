@@ -7,5 +7,7 @@ public record TranslateResponse(
         List<TranslationItem> translations,
         String fullTranslation,
         List<String> warnings,
-        String status) {
+        String status,
+        List<String> suggestions,
+        String contributeUrl) {
 }

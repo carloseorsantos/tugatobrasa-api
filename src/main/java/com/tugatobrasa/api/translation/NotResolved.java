@@ -1,4 +1,6 @@
 package com.tugatobrasa.api.translation;
 
-public record NotResolved() implements ResolutionResult {
+import java.util.List;
+
+public record NotResolved(List<String> suggestions, String contributeUrl) implements ResolutionResult {
 }
