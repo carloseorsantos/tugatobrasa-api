@@ -1,6 +1,7 @@
 package com.tugatobrasa.api.translation;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.tugatobrasa.api.glossary.GlossaryEntry;
+import com.tugatobrasa.api.glossary.GlossaryFuzzyLookup;
 import com.tugatobrasa.api.glossary.GlossaryIndex;
 
 class GlossaryResolverTest {
@@ -21,7 +23,7 @@ class GlossaryResolverTest {
                 entry("autocarro", "ônibus", false),
                 entry("propina", "mensalidade", true),
                 entry("propina", "suborno", true)));
-        resolver = new GlossaryResolver(index);
+        resolver = new GlossaryResolver(index, mock(GlossaryFuzzyLookup.class));
     }
 
     @Test
@@ -53,6 +55,19 @@ class GlossaryResolverTest {
         List<GlossaryEntry> result = resolver.resolveExact("inexistente", Direction.PT_TO_BR);
 
         assertThat(result).isEmpty();
+    }
+
+    @Test
+    void delegatesFuzzyLookupToTheRightColumnByDirection() {
+        GlossaryFuzzyLookup fuzzyLookup = mock(GlossaryFuzzyLookup.class);
+        GlossaryEntry match = entry("autocarro", "ônibus", false);
+        org.mockito.Mockito.when(fuzzyLookup.findSimilarByTermPt("autocaro", GlossaryResolver.FUZZY_THRESHOLD))
+                .thenReturn(List.of(match));
+        GlossaryResolver resolverWithMockFuzzy = new GlossaryResolver(new GlossaryIndex(), fuzzyLookup);
+
+        List<GlossaryEntry> result = resolverWithMockFuzzy.resolveFuzzy("autocaro", Direction.PT_TO_BR);
+
+        assertThat(result).containsExactly(match);
     }
 
     private static GlossaryEntry entry(String termPt, String termBr, boolean falseFriend) {
