@@ -26,14 +26,14 @@ public class TranslationController {
     public TranslateResponse translate(@Valid @RequestBody TranslateRequest request) {
         ResolutionResult result = pipelineService.resolve(request.text(), request.direction());
         return switch (result) {
-            case Resolved r -> toResponse(request, r.entries());
+            case Resolved r -> toResponse(request, r.entries(), r.confidence());
             case NotResolved ignored -> new TranslateResponse(request.text(), List.of(), null, List.of(), "NOT_FOUND");
         };
     }
 
-    private TranslateResponse toResponse(TranslateRequest request, List<GlossaryEntry> entries) {
+    private TranslateResponse toResponse(TranslateRequest request, List<GlossaryEntry> entries, double confidence) {
         List<TranslationItem> items = entries.stream()
-                .map(e -> toItem(e, request.direction()))
+                .map(e -> toItem(e, request.direction(), confidence))
                 .toList();
 
         List<String> warnings = items.stream()
@@ -47,7 +47,7 @@ public class TranslationController {
         return new TranslateResponse(request.text(), items, fullTranslation, warnings, null);
     }
 
-    private TranslationItem toItem(GlossaryEntry entry, Direction direction) {
+    private TranslationItem toItem(GlossaryEntry entry, Direction direction, double confidence) {
         boolean ptToBr = direction == Direction.PT_TO_BR;
         return new TranslationItem(
                 ptToBr ? entry.termPt() : entry.termBr(),
@@ -57,7 +57,7 @@ public class TranslationController {
                 entry.falseFriend(),
                 ptToBr ? entry.noteBr() : entry.notePt(),
                 ptToBr ? entry.exampleBr() : entry.examplePt(),
-                1.0,
+                confidence,
                 "GLOSSARY");
     }
 }
