@@ -1,0 +1,19 @@
+input,direction,expected_term,expect_false_friend_alert
+propina,PT_TO_BR,mensalidade,true
+mensalidade,BR_TO_PT,propina,true
+suborno,PT_TO_BR,propina,true
+propina,BR_TO_PT,suborno,true
+rapariga,PT_TO_BR,moça,true
+moça,BR_TO_PT,rapariga,true
+bicha,PT_TO_BR,fila,true
+fila,BR_TO_PT,bicha,true
+apelido,PT_TO_BR,sobrenome,true
+sobrenome,BR_TO_PT,apelido,true
+fato,PT_TO_BR,terno,true
+terno,BR_TO_PT,fato,true
+camisola,PT_TO_BR,suéter,true
+suéter,BR_TO_PT,camisola,true
+banheiro,PT_TO_BR,salva-vidas,true
+salva-vidas,BR_TO_PT,banheiro,true
+gozar,PT_TO_BR,tirar sarro,true
+tirar sarro,BR_TO_PT,gozar,true

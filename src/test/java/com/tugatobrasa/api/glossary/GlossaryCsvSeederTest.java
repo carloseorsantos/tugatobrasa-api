@@ -2,6 +2,15 @@ package com.tugatobrasa.api.glossary;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,5 +69,57 @@ class GlossaryCsvSeederTest {
 
         Integer countAfter = jdbcTemplate.queryForObject("SELECT count(*) FROM glossary_entry", Integer.class);
         assertThat(countAfter).isEqualTo(countBefore);
+    }
+
+    @Test
+    void glossaryHasFalseFriendEntries() {
+        Integer falseFriendCount = jdbcTemplate.queryForObject(
+                "SELECT count(*) FROM glossary_entry WHERE false_friend = true", Integer.class);
+        assertThat(falseFriendCount).isGreaterThan(0);
+    }
+
+    @Test
+    void pgTrgmResolvesFuzzyTypos() {
+        List<String> matches = jdbcTemplate.queryForList(
+                "SELECT term_pt FROM glossary_entry WHERE similarity(term_pt, ?) > 0.3 ORDER BY similarity(term_pt, ?) DESC",
+                String.class, "autocaro", "autocaro");
+
+        assertThat(matches).contains("autocarro");
+    }
+
+    @Test
+    void linguisticCasesMatchTheSeededGlossary() throws IOException {
+        List<CSVRecord> cases = readLinguisticCases();
+        assertThat(cases).isNotEmpty();
+
+        for (CSVRecord row : cases) {
+            String input = row.get("input");
+            String direction = row.get("direction");
+            String expectedTerm = row.get("expected_term");
+            boolean expectAlert = Boolean.parseBoolean(row.get("expect_false_friend_alert"));
+
+            List<GlossaryEntry> candidates = "PT_TO_BR".equals(direction)
+                    ? glossaryIndex.lookupByTermPt(input)
+                    : glossaryIndex.lookupByTermBr(input);
+
+            boolean matched = candidates.stream().anyMatch(e -> {
+                String target = "PT_TO_BR".equals(direction) ? e.termBr() : e.termPt();
+                return target.equals(expectedTerm) && e.falseFriend() == expectAlert;
+            });
+
+            assertThat(matched)
+                    .as("caso linguístico: %s (%s) -> %s, alerta=%s", input, direction, expectedTerm, expectAlert)
+                    .isTrue();
+        }
+    }
+
+    private static List<CSVRecord> readLinguisticCases() throws IOException {
+        try (InputStream is = GlossaryCsvSeederTest.class.getClassLoader()
+                .getResourceAsStream("linguistic-cases.csv")) {
+            CSVFormat format = CSVFormat.DEFAULT.builder().setHeader().setSkipHeaderRecord(true).build();
+            try (CSVParser parser = format.parse(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                return parser.getRecords();
+            }
+        }
     }
 }
