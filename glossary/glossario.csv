@@ -1,0 +1,102 @@
+term_pt,term_br,alternatives_pt,alternatives_br,register,false_friend,note_pt,note_br,example_pt,example_br,region,status
+autocarro,ônibus,machimbombo (regional),busão (informal),NEUTRO,false,,,Vou apanhar o autocarro.,Vou pegar o ônibus.,,CURATED
+telemóvel,celular,,,NEUTRO,false,,,,,,CURATED
+comboio,trem,,,NEUTRO,false,,,,,,CURATED
+casa de banho,banheiro,,,NEUTRO,false,,,,,,CURATED
+pequeno-almoço,café da manhã,,,NEUTRO,false,,,,,,CURATED
+frigorífico,geladeira,,,NEUTRO,false,,,,,,CURATED
+sandes,sanduíche,,,NEUTRO,false,,,,,,CURATED
+ecrã,tela,,,NEUTRO,false,,,,,,CURATED
+rato,mouse,,,NEUTRO,false,,,,,,CURATED
+ficheiro,arquivo,,,NEUTRO,false,,,,,,CURATED
+portagem,pedágio,,,NEUTRO,false,,,,,,CURATED
+talho,açougue,,,NEUTRO,false,,,,,,CURATED
+sumo,suco,,,NEUTRO,false,,,,,,CURATED
+gelado,sorvete,,,NEUTRO,false,,,,,,CURATED
+elétrico,bonde,,,NEUTRO,false,,,,,,CURATED
+metro,metrô,,,NEUTRO,false,,,,,,CURATED
+calças,calça,,,NEUTRO,false,,,,,,CURATED
+sapatilhas,tênis,,,NEUTRO,false,,,,,,CURATED
+autoclismo,descarga,,,NEUTRO,false,,,,,,CURATED
+rés-do-chão,térreo,,,NEUTRO,false,,,,,,CURATED
+bilhete,passagem,,,NEUTRO,false,,,,,,CURATED
+betão,concreto,,,NEUTRO,false,,,,,,CURATED
+relvado,gramado,,,NEUTRO,false,,,,,,CURATED
+pastilha elástica,chiclete,,,NEUTRO,false,,,,,,CURATED
+autoestrada,rodovia,,,NEUTRO,false,,,,,,CURATED
+parque de estacionamento,estacionamento,,,NEUTRO,false,,,,,,CURATED
+carrinha,van,,,NEUTRO,false,,,,,,CURATED
+atrelado,reboque,,,NEUTRO,false,,,,,,CURATED
+congelador,freezer,,,NEUTRO,false,,,,,,CURATED
+esferográfica,caneta,,,NEUTRO,false,,,,,,CURATED
+fato de banho,maiô,,,NEUTRO,false,,,,,,CURATED
+calção de banho,sunga,,,NEUTRO,false,,,,,,CURATED
+camisa interior,camiseta,,,NEUTRO,false,,,,,,CURATED
+chávena,xícara,,,NEUTRO,false,,,,,,CURATED
+lava-loiça,pia,,,NEUTRO,false,,,,,,CURATED
+tacho,panela,,,NEUTRO,false,,,,,,CURATED
+penso rápido,curativo,,,NEUTRO,false,,,,,,CURATED
+urgências,pronto-socorro,,,NEUTRO,false,,,,,,CURATED
+médico de família,clínico geral,,,NEUTRO,false,,,,,,CURATED
+carta de condução,carteira de motorista,,,NEUTRO,false,,,,,,CURATED
+matrícula,placa,,,NEUTRO,false,,,,,,CURATED
+berbequim,furadeira,,,NEUTRO,false,,,,,,CURATED
+pen usb,pendrive,,,NEUTRO,false,,,,,,CURATED
+computador portátil,notebook,,,NEUTRO,false,,,,,,CURATED
+alcunha,apelido,,,NEUTRO,false,,,,,,CURATED
+candeeiro,abajur,,,NEUTRO,false,,,,,,CURATED
+fato-macaco,macacão,,,NEUTRO,false,,,,,,CURATED
+máquina de barbear,barbeador,,,NEUTRO,false,,,,,,CURATED
+aspirador,aspirador de pó,,,NEUTRO,false,,,,,,CURATED
+ferro de engomar,ferro de passar,,,NEUTRO,false,,,,,,CURATED
+bolacha,biscoito,,,NEUTRO,false,,,,,,CURATED
+fiambre,presunto,,,NEUTRO,false,,,,,,CURATED
+passadeira,faixa de pedestres,,,NEUTRO,false,,,,,,CURATED
+parque infantil,parquinho,,,NEUTRO,false,,,,,,CURATED
+jardim-de-infância,pré-escola,,,NEUTRO,false,,,,,,CURATED
+explicador,professor particular,,,NEUTRO,false,,,,,,CURATED
+ensino secundário,ensino médio,,,NEUTRO,false,,,,,,CURATED
+patrão,chefe,,,NEUTRO,false,,,,,,CURATED
+impermeável,capa de chuva,,,NEUTRO,false,,,,,,CURATED
+roupeiro,guarda-roupa,,,NEUTRO,false,,,,,,CURATED
+bebé,bebê,,,NEUTRO,false,,,,,,CURATED
+constipação,resfriado,,,NEUTRO,false,,,,,,CURATED
+penso higiénico,absorvente,,,NEUTRO,false,,,,,,CURATED
+gasóleo,diesel,,,NEUTRO,false,,,,,,CURATED
+bomba de gasolina,posto de gasolina,,,NEUTRO,false,,,,,,CURATED
+mala de mão,bolsa,,,NEUTRO,false,,,,,,CURATED
+saco de plástico,sacola,,,NEUTRO,false,,,,,,CURATED
+fatura,nota fiscal,,,NEUTRO,false,,,,,,CURATED
+correio eletrónico,e-mail,,,NEUTRO,false,,,,,,CURATED
+propina,mensalidade,,,NEUTRO,true,"Em Portugal, propina é a mensalidade paga por estudantes universitários.","No Brasil, propina significa suborno — nunca diga que pagou propina na faculdade.",Paguei as propinas da universidade.,Paguei a mensalidade da faculdade.,,CURATED
+suborno,propina,luvas,,NEUTRO,true,"Em Portugal, suborno é a palavra neutra para pagamento ilícito — 'propina' aqui é mensalidade, não isto.","No Brasil, propina é o termo comum para suborno — evite usá-la no sentido de mensalidade, que soa estranho.",O político foi acusado de suborno.,O político foi acusado de receber propina.,,CURATED
+rapariga,moça,,garota,NEUTRO,true,"Em Portugal, rapariga é o termo neutro e comum para moça jovem, usado por todas as idades.","No Brasil, sobretudo no Norte e Nordeste, rapariga é termo pejorativo, associado a prostituta — evite usar.",Aquela rapariga trabalha na farmácia.,Aquela moça trabalha na farmácia.,,CURATED
+bicha,fila,,,NEUTRO,true,"Em Portugal, bicha é simplesmente fila de espera, palavra neutra e comum.","No Brasil, bicha é calão ofensivo para homem gay — nunca use nesse sentido.",Estive uma hora na bicha do banco.,Estive uma hora na fila do banco.,,CURATED
+apelido,sobrenome,,,NEUTRO,true,"Em Portugal, apelido é o nome de família — o que no Brasil se chama sobrenome.","No Brasil, apelido é uma alcunha informal — nada a ver com o nome de família.",Qual é o teu apelido de família?,Qual é o seu sobrenome?,,CURATED
+fato,terno,,,NEUTRO,true,"Em Portugal, fato é a roupa formal masculina — o terno brasileiro. 'Facto' (com c) é que significa acontecimento.","No Brasil, fato significa acontecimento/realidade — não tem nada a ver com roupa.",Ele foi ao casamento de fato e gravata.,Ele foi ao casamento de terno e gravata.,,CURATED
+camisola,suéter,,,NEUTRO,true,"Em Portugal, camisola é uma peça de roupa para o frio — um pulôver.","No Brasil, camisola é roupa de dormir — sentido bem diferente.",Vou vestir a camisola porque está frio.,Vou vestir o suéter porque está frio.,,CURATED
+banheiro,salva-vidas,,,NEUTRO,true,"Em Portugal, banheiro é a pessoa que vigia a praia ou a piscina — o nadador-salvador.","No Brasil, banheiro é o compartimento com sanita e chuveiro — nada a ver com o 'banheiro' português.",O banheiro apitou porque a bandeira estava vermelha.,O salva-vidas apitou porque a bandeira estava vermelha.,,CURATED
+fixe,legal,porreiro,maneiro|massa,GIRIA,false,,,Este filme é bué fixe!,Esse filme é muito legal!,,CURATED
+bué,muito,,pra caramba,GIRIA,false,,,Isto é bué caro.,Isso é caro pra caramba.,,CURATED
+gajo,cara,,mano,GIRIA,false,,,Aquele gajo é simpático.,Aquele cara é simpático.,,CURATED
+gaja,mina,,,GIRIA,false,,,A gaja do café é muito simpática.,A mina do café é muito simpática.,,CURATED
+giro,fofo,,bonitinho,GIRIA,false,,,Que carro tão giro!,Que carro tão fofo!,,CURATED
+porreiro,maneiro,,,GIRIA,false,,,O teu plano é porreiro.,Seu plano é maneiro.,,CURATED
+baril,maneiro,,,GIRIA,false,,,Esse concerto foi baril.,Esse show foi maneiro.,Porto,CURATED
+altamente,irado,,,GIRIA,false,,,A festa foi altamente!,O show foi irado!,,CURATED
+brutal,sinistro,,,GIRIA,false,,,Esse jogo foi brutal.,Esse jogo foi sinistro.,,CURATED
+bófia,tira,,,GIRIA,false,,,A bófia parou o carro dele.,A tira parou o carro dele.,,CURATED
+bazar,vazar,,,GIRIA,false,,,"Já é tarde, vou bazar.","Já é tarde, vou vazar.",,CURATED
+pá,mano,,,GIRIA,false,,,"Então pá, como é que isso foi?","Então mano, como é que isso foi?",,CURATED
+malta,galera,,,GIRIA,false,,,A malta toda vai à praia.,A galera toda vai à praia.,,CURATED
+cromo,nerd,,,GIRIA,false,,,Ele é um bocado cromo com computadores.,Ele é meio nerd com computadores.,,CURATED
+chavalo,moleque,,,GIRIA,false,,,Aquele chavalo corre muito rápido.,Aquele moleque corre muito rápido.,,CURATED
+canja,mamão com açúcar,,,GIRIA,false,,,Este teste foi canja.,Esta prova foi mamão com açúcar.,,CURATED
+desenrascar,dar um jeito,,,GIRIA,false,,,"Não te preocupes, eu vou desenrascar isso.","Não se preocupe, eu vou dar um jeito nisso.",,CURATED
+gaita,grana,,,GIRIA,false,,,Não tenho gaita para isso.,Não tenho grana para isso.,,CURATED
+totó,cdf,,,GIRIA,false,,,Ele sempre foi o totó da turma.,Ele sempre foi o CDF da turma.,,CURATED
+embirrar,implicar,,,GIRIA,false,,,Ela adora embirrar comigo.,Ela adora implicar comigo.,,CURATED
+gozar,tirar sarro,,,GIRIA,true,"Em Portugal, gozar (com alguém) é brincar, troçar — sentido inofensivo e comum.","No Brasil, gozar é termo vulgar para orgasmo — nunca use no sentido português sem contexto.",Estás a gozar comigo?,Para de tirar sarro de mim!,,CURATED
+foda-se,porra,,,CALAO,false,"Interjeição vulgar de frustração, muito comum e pouco chocante entre adultos em contexto informal.","Interjeição vulgar equivalente, de uso parecido no dia a dia informal.","Foda-se, esqueci-me da carteira em casa.","Porra, esqueci a carteira em casa.",,CURATED
+cabrão,desgraçado,,,CALAO,false,"Insulto forte; entre amigos próximos pode soar quase afetuoso, dependendo do tom.","Insulto forte no Brasil também — cuidado com o tom, não é brincadeira leve.","Seu cabrão, enganaste-me!","Seu desgraçado, você me enganou!",,CURATED
+caraças,caramba,,,CALAO,false,"Interjeição de surpresa, mais forte do que o 'caramba' brasileiro.","Interjeição de surpresa, mais leve do que a versão portuguesa.","Caraças, que susto!","Caramba, que susto!",,CURATED
