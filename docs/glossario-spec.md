@@ -33,7 +33,7 @@
 1. Cabeçalho exatamente igual à ordem/nomes da tabela acima.
 2. Toda linha com exatamente 12 campos.
 3. Campos obrigatórios não-vazios; enums (`register`, `false_friend`, `status`) com valores válidos.
-4. `term_pt` e `term_br` em minúsculas e normalizados NFC (exceção: nomes próprios — validador aceita com flag `--allow-proper-noun` mediante revisão).
+4. `term_pt` e `term_br` em minúsculas e normalizados NFC (exceção: nomes próprios — liste o termo exato, sensível a maiúsculas, em `glossary/proper-nouns.txt` no mesmo PR; é uma mudança revisável como qualquer outra).
 5. **Sem duplicata exata do par** (`term_pt`,`term_br`). Múltiplas linhas com o mesmo `term_pt` (ou `term_br`) são permitidas — é assim que a assimetria direcional se representa (ex.: propina→mensalidade e propina→suborno em linhas distintas).
 
 **Semânticas — erro fatal:**

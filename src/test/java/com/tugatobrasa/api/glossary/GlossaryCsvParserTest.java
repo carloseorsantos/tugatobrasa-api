@@ -63,6 +63,28 @@ class GlossaryCsvParserTest {
     }
 
     @Test
+    void failsWhenTermIsNotLowercase() throws IOException {
+        Path csv = writeCsv(HEADER, "Termo,termo_br,,,NEUTRO,false,,,,,,CURATED");
+
+        assertThatThrownBy(() -> parser.parse(csv))
+                .isInstanceOf(GlossaryCsvException.class)
+                .hasMessageContaining("linha 2")
+                .hasMessageContaining("term_pt 'Termo'")
+                .hasMessageContaining("proper-nouns.txt");
+    }
+
+    @Test
+    void acceptsUppercaseTermWhenListedInProperNounAllowlist() throws IOException {
+        Path csv = writeCsv(HEADER, "Porto,Porto,,,NEUTRO,false,,,,,,CURATED");
+        Files.writeString(csv.resolveSibling("proper-nouns.txt"), "Porto\n", StandardCharsets.UTF_8);
+
+        var entries = parser.parse(csv);
+
+        assertThat(entries).hasSize(1);
+        assertThat(entries.get(0).termPt()).isEqualTo("Porto");
+    }
+
+    @Test
     void parsesValidRowsIntoEntries() throws IOException {
         Path csv = writeCsv(HEADER,
                 "autocarro,ônibus,machimbombo,busão|ônibus rural,NEUTRO,false,,,,,,CURATED");
