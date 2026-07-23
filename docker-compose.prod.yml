@@ -1,0 +1,16 @@
+# Override de produção. Uso:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#
+# Diferenças do compose de dev:
+# - Postgres não publica porta no host: só alcançável dentro da rede docker
+#   interna (api -> db:5432), nunca da internet.
+# - POSTGRES_PASSWORD vem de .env na instância (nunca commitado), gerado com
+#   `openssl rand -base64 24` — o default do compose base é só para dev local.
+# - restart: unless-stopped para sobreviver a reboot da instância.
+services:
+  db:
+    ports: !override []
+    restart: unless-stopped
+
+  api:
+    restart: unless-stopped
