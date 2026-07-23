@@ -27,7 +27,8 @@ public class TranslationController {
         ResolutionResult result = pipelineService.resolve(request.text(), request.direction());
         return switch (result) {
             case Resolved r -> toResponse(request, r.entries(), r.confidence());
-            case NotResolved ignored -> new TranslateResponse(request.text(), List.of(), null, List.of(), "NOT_FOUND");
+            case NotResolved nr -> new TranslateResponse(
+                    request.text(), List.of(), null, List.of(), "NOT_FOUND", nr.suggestions(), nr.contributeUrl());
         };
     }
 
@@ -44,7 +45,7 @@ public class TranslationController {
 
         String fullTranslation = items.size() == 1 ? items.get(0).target() : null;
 
-        return new TranslateResponse(request.text(), items, fullTranslation, warnings, null);
+        return new TranslateResponse(request.text(), items, fullTranslation, warnings, null, List.of(), null);
     }
 
     private TranslationItem toItem(GlossaryEntry entry, Direction direction, double confidence) {

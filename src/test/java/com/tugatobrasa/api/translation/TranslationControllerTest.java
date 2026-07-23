@@ -1,5 +1,6 @@
 package com.tugatobrasa.api.translation;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
@@ -36,6 +38,9 @@ class TranslationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Test
     void translatesExactMatch() throws Exception {
@@ -79,6 +84,32 @@ class TranslationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("NOT_FOUND"))
                 .andExpect(jsonPath("$.translations").isEmpty());
+    }
+
+    @Test
+    void notFoundIncludesSuggestionsAndContributeUrl() throws Exception {
+        mockMvc.perform(post("/api/v1/translate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"text":"propnia","direction":"PT_TO_BR"}"""))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("NOT_FOUND"))
+                .andExpect(jsonPath("$.suggestions[0]").value("propina"))
+                .andExpect(jsonPath("$.contributeUrl").value(
+                        "https://github.com/carloseorsantos/tugatobrasa-api/issues/new?template=novo-termo.yml&termo=propnia"));
+    }
+
+    @Test
+    void notFoundLogsInputToTranslationLog() throws Exception {
+        mockMvc.perform(post("/api/v1/translate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"text":"termoregistradonolog","direction":"PT_TO_BR"}"""))
+                .andExpect(status().isOk());
+
+        Integer count = jdbcTemplate.queryForObject(
+                "SELECT count(*) FROM translation_log WHERE input = ?", Integer.class, "termoregistradonolog");
+        assertThat(count).isEqualTo(1);
     }
 
     @Test
