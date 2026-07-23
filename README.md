@@ -9,11 +9,12 @@ API do [TugaToBrasa](https://github.com/carloseorsantos/tugatobrasa) — traduto
 ```
 POST /api/v1/translate
   → Normalizer → GlossaryResolver (exato → lema → fuzzy)
-  → RuleResolver (gerúndio ⇌ estar a, pronomes, grafias)
   → NotFoundHandler (sugestões + convite de contribuição)
 ```
 
-Postgres (pg_trgm para busca fuzzy) + Flyway (migrations e seed do CSV) + cache Caffeine. Contrato publicado em `openapi.yml`.
+Postgres (pg_trgm para busca fuzzy) + Flyway (migrations e seed do CSV). Contrato publicado em `openapi.yml`.
+
+**Planejado, ainda não implementado** (Fase 4/5): `RuleResolver` (gerúndio ⇌ "estar a", pronomes, grafias), cache Caffeine, `GET /glossary`, `POST /feedback`.
 
 ## Rodando localmente
 
@@ -22,23 +23,33 @@ docker compose up          # sobe Postgres + API
 curl localhost:8080/actuator/health
 ```
 
+## Em produção
+
+API publicada num AWS Lightsail, deploy automático a cada merge em `main` com CI verde. Detalhes: [docs/deploy.md](docs/deploy.md).
+
 ## Usando a API
 
 ### `POST /api/v1/translate`
 
 ```json
-{ "text": "bué fixe", "direction": "PT_TO_BR", "context": null }
+{ "text": "autocarro", "direction": "PT_TO_BR" }
 ```
 
-Resposta: tradução com registro (`NEUTRO|GIRIA|CALAO`), alternativas, exemplo, alerta de falso amigo e origem (`GLOSSARY|RULE`). Termo desconhecido retorna `NOT_FOUND` com sugestões próximas e link de contribuição — nunca erro.
+```json
+{
+  "input": "autocarro",
+  "translations": [{
+    "source": "autocarro", "target": "ônibus",
+    "alternatives": ["busão (informal)"], "register": "NEUTRO", "falseFriend": false,
+    "example": "Vou pegar o ônibus.", "confidence": 1.0, "resolvedBy": "GLOSSARY"
+  }],
+  "fullTranslation": "ônibus", "warnings": [], "suggestions": [], "contributeUrl": null
+}
+```
 
-| Método | Rota | Função |
-|--------|------|--------|
-| `POST` | `/api/v1/translate` | traduz palavra/frase (bidirecional) |
-| `GET` | `/api/v1/glossary?q=` | busca no glossário |
-| `POST` | `/api/v1/feedback` | feedback de tradução |
+Falso amigo: `falseFriend: true` + `note` preenchida + a mesma nota entra em `warnings`. Termo desconhecido: `translations` vazio, `suggestions` com termos próximos e `contributeUrl` apontando pra abrir issue de novo termo — nunca erro.
 
-Documentação completa: `openapi.yml` (gerado por springdoc).
+Documentação completa: `openapi.yml` (gerado por springdoc, em `/v3/api-docs` com a API rodando).
 
 ## O glossário
 

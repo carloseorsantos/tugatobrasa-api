@@ -7,7 +7,7 @@ Obrigado pelo interesse! A forma mais valiosa de contribuir é **adicionando pal
 1. [Abra uma issue de novo termo](https://github.com/carloseorsantos/tugatobrasa-api/issues/new/choose) usando o formulário.
 2. Preencha: o termo, a tradução, a direção (PT→BR ou BR→PT), o registro (neutro, gíria ou calão) e uma frase de exemplo.
 3. **Se a palavra engana** (tipo «propina» ou «rapariga»), marque como falso amigo e explique o risco — esse aviso é a alma do projeto.
-4. Um mantenedor valida contra dicionários de referência (Priberam/Infopédia para pt-PT; Dicio/Michaelis para pt-BR) e adiciona ao glossário citando a fonte.
+4. Um bot abre automaticamente um PR rascunho com a sua entrada (só transcreve o que você escreveu — não valida nada). Um mantenedor confirma contra dicionários de referência (Priberam/Infopédia para pt-PT; Dicio/Michaelis para pt-BR), completa o que faltar e aprova citando a fonte.
 
 ## Adicionar via Pull Request (com código)
 

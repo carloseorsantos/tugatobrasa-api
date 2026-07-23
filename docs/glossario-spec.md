@@ -48,7 +48,7 @@
 
 ## 4. Fluxo de contribuição
 
-- **Não-dev:** abre issue com o template `novo-termo.yml` (termo, direção, registro, exemplo, é falso amigo?) → mantenedor converte em linha no CSV via PR.
+- **Não-dev:** abre issue com o template `novo-termo.yml` (termo, direção, registro, exemplo, é falso amigo?). Uma Action (`.github/workflows/glossary-issue-to-pr.yml`) transcreve os campos automaticamente pra um PR rascunho com a linha no CSV — só mecaniza a transcrição, não valida nada; o mantenedor completa o lado que falta e confirma contra dicionário antes de aprovar.
 - **Dev:** PR direto no CSV. O CI roda a validação; qualquer erro fatal quebra o build com mensagem apontando linha e regra violada.
 - Toda entrada nova entra como `PENDING`; vira `CURATED` só após revisão contra dicionários de referência (Priberam/Infopédia para pt-PT; Dicio/Michaelis para pt-BR), com a fonte citada no PR.
 - `REJECTED` permanece no arquivo (com nota) para não ser re-proposta — o CSV é também a memória do que já foi avaliado.
