@@ -20,9 +20,13 @@ jobs:
       # seguida: merges feitos com GITHUB_TOKEN não disparam workflows via
       # push/pull_request-closed (proteção anti-loop do GitHub), então um
       # deploy.yml separado nunca veria esse merge acontecer
-      - name: Wait for checks and merge
+      - name: Wait for required checks and merge
+        # --required: só espera os checks exigidos pela branch protection (test).
+        # Sem essa flag, --watch espera TODOS os checks da PR — incluindo a
+        # própria run deste job (pull_request_target também aparece como
+        # check) — travando pra sempre esperando por si mesma.
         run: |
-          gh pr checks "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}" --watch --fail-fast
+          gh pr checks "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}" --watch --required --fail-fast
           gh pr merge --squash "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
