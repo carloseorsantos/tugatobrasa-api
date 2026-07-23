@@ -19,6 +19,7 @@ Obrigado pelo interesse! A forma mais valiosa de contribuir é **adicionando pal
    - entrada nova entra com `status=PENDING`.
 3. Cite a fonte (link do dicionário de referência) na descrição do PR.
 4. O CI valida o CSV; erro fatal aponta linha e regra violada.
+5. Um mantenedor revisa e mescla manualmente — PRs de contribuidores externos nunca mesclam sozinhos, mesmo com o CI verde.
 
 ## Contribuir com código
 
