@@ -4,7 +4,7 @@ services:
     environment:
       POSTGRES_DB: tugatobrasa
       POSTGRES_USER: tugatobrasa
-      POSTGRES_PASSWORD: tugatobrasa
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tugatobrasa}
     ports:
       - "5432:5432"
     volumes:
@@ -22,7 +22,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tugatobrasa
       SPRING_DATASOURCE_USERNAME: tugatobrasa
-      SPRING_DATASOURCE_PASSWORD: tugatobrasa
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-tugatobrasa}
     depends_on:
       db:
         condition: service_healthy
