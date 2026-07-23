@@ -1,0 +1,25 @@
+# maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# ide
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# env / local
+.env
+*.local.yml
+application-local.yml
+
+# claude agent kit (local only, not shipped to the public repo)
+.claude/
+
+# os
+.DS_Store
+
+# logs
+*.log

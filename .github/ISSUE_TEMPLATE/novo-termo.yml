@@ -1,0 +1,86 @@
+name: "Novo termo para o glossário"
+description: "Sugira uma palavra, gíria ou expressão pt-PT ⇌ pt-BR — não precisa saber programar"
+title: "Novo termo: "
+labels: ["glossário", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por contribuir! Preencha o que souber — um mantenedor valida contra dicionários de referência antes de entrar no glossário.
+
+  - type: input
+    id: termo
+    attributes:
+      label: "Termo original"
+      placeholder: "ex.: bué"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: direcao
+    attributes:
+      label: "Direção"
+      options:
+        - "pt-PT → pt-BR (palavra usada em Portugal)"
+        - "pt-BR → pt-PT (palavra usada no Brasil)"
+    validations:
+      required: true
+
+  - type: input
+    id: traducao
+    attributes:
+      label: "Tradução"
+      description: "Como se diz do outro lado? Pode listar alternativas separadas por vírgula."
+      placeholder: "ex.: muito, pra caramba"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: registro
+    attributes:
+      label: "Registro"
+      description: "Gíria e calão exigem frase de exemplo."
+      options:
+        - "Neutro (uso comum)"
+        - "Gíria (informal)"
+        - "Calão (pesado/vulgar)"
+    validations:
+      required: true
+
+  - type: input
+    id: exemplo
+    attributes:
+      label: "Frase de exemplo"
+      placeholder: "ex.: Gostei bué do concerto."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: falso-amigo
+    attributes:
+      label: "É falso amigo?"
+      description: "A palavra existe do outro lado com sentido diferente, constrangedor ou ofensivo?"
+      options:
+        - "Não"
+        - "Sim — explico abaixo"
+    validations:
+      required: true
+
+  - type: textarea
+    id: falso-amigo-nota
+    attributes:
+      label: "Se for falso amigo: qual é o risco?"
+      description: "Explique em 1-2 frases o que a palavra significa do outro lado e por que isso pode dar problema."
+      placeholder: "ex.: No Brasil, propina significa suborno — dizer que «pagou propina na universidade» causa má impressão imediata."
+
+  - type: input
+    id: regiao
+    attributes:
+      label: "Região (opcional)"
+      description: "Se o termo é regional (ex.: Porto, Nordeste), diga onde."
+
+  - type: input
+    id: fonte
+    attributes:
+      label: "Fonte (opcional)"
+      description: "Link de dicionário ou referência que confirma o sentido (Priberam, Infopédia, Dicio…)."
