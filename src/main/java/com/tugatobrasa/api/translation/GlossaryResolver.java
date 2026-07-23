@@ -32,6 +32,12 @@ public class GlossaryResolver {
                 : glossaryIndex.lookupByTermBr(term);
     }
 
+    public List<GlossaryEntry> resolveLema(String term, Direction direction) {
+        return direction == Direction.PT_TO_BR
+                ? glossaryIndex.lookupByLemaPt(term)
+                : glossaryIndex.lookupByLemaBr(term);
+    }
+
     public List<GlossaryEntry> resolveFuzzy(String term, Direction direction) {
         return direction == Direction.PT_TO_BR
                 ? fuzzyLookup.findSimilarByTermPt(term, FUZZY_THRESHOLD)

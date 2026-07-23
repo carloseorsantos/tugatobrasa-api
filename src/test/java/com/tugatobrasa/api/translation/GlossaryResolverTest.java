@@ -58,6 +58,13 @@ class GlossaryResolverTest {
     }
 
     @Test
+    void resolvesPluralViaLema() {
+        List<GlossaryEntry> result = resolver.resolveLema("autocarros", Direction.PT_TO_BR);
+
+        assertThat(result).extracting(GlossaryEntry::termPt).containsExactly("autocarro");
+    }
+
+    @Test
     void delegatesFuzzyLookupToTheRightColumnByDirection() {
         GlossaryFuzzyLookup fuzzyLookup = mock(GlossaryFuzzyLookup.class);
         GlossaryEntry match = entry("autocarro", "ônibus", false);
