@@ -15,7 +15,7 @@ public class GlossaryIndex {
     private final AtomicReference<Map<String, List<GlossaryEntry>>> byTermBr =
             new AtomicReference<>(Map.of());
 
-    void reload(List<GlossaryEntry> entries) {
+    public void reload(List<GlossaryEntry> entries) {
         byTermPt.set(entries.stream().collect(Collectors.groupingBy(GlossaryEntry::termPt)));
         byTermBr.set(entries.stream().collect(Collectors.groupingBy(GlossaryEntry::termBr)));
     }
