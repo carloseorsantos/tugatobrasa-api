@@ -27,9 +27,18 @@ public class TranslationController {
         ResolutionResult result = pipelineService.resolve(request.text(), request.direction());
         return switch (result) {
             case Resolved r -> toResponse(request, r.entries(), r.confidence());
+            case RuleResolved rr -> toResponse(request, rr);
             case NotResolved nr -> new TranslateResponse(
                     request.text(), List.of(), null, List.of(), "NOT_FOUND", nr.suggestions(), nr.contributeUrl());
         };
+    }
+
+    private TranslateResponse toResponse(TranslateRequest request, RuleResolved ruleResolved) {
+        TranslationItem item = new TranslationItem(
+                request.text(), ruleResolved.target(), List.of(), null, false,
+                null, null, ruleResolved.confidence(), "RULE");
+        return new TranslateResponse(
+                request.text(), List.of(item), ruleResolved.target(), List.of(), null, List.of(), null);
     }
 
     private TranslateResponse toResponse(TranslateRequest request, List<GlossaryEntry> entries, double confidence) {
