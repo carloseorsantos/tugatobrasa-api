@@ -76,6 +76,18 @@ class TranslationControllerTest {
     }
 
     @Test
+    void resolvesGerundEstarAPhraseViaRule() throws Exception {
+        mockMvc.perform(post("/api/v1/translate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"text":"estou a trabalhar","direction":"PT_TO_BR"}"""))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.fullTranslation").value("estou trabalhando"))
+                .andExpect(jsonPath("$.translations[0].resolvedBy").value("RULE"))
+                .andExpect(jsonPath("$.translations[0].falseFriend").value(false));
+    }
+
+    @Test
     void returnsNotFoundStatusWithoutHttpError() throws Exception {
         mockMvc.perform(post("/api/v1/translate")
                         .contentType(MediaType.APPLICATION_JSON)
